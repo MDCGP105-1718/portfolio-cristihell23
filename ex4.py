@@ -14,4 +14,4 @@ print (f"It is {is_heavy} not overweight.")
 print (f"He's got {my_eyes} eyes and {my_hair} hair.")
 
 
-print(f"If I add {my_age}, {my_height} and {my_weight} I get {total}")
+print(f" if I add {my_age}, {my_height} and {my_weight} I get {total}")
