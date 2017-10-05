@@ -1,2 +1,2 @@
-For N in range (99, 0)
-print ("99 bottles of beer on the wall, 99 bottles of beer.")
+for n in range (99, 0, -1):
+    print (f"{n} bottles of beer on the wall, {n} bottles of beer.")
