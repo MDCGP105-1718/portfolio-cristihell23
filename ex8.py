@@ -10,8 +10,8 @@ current_savings = 0 #
 r = 0.04 # 4% return on investments
 monthly_salary = annual_salary / 12
 monthly_savings = monthly_salary * portion_saved
-if number_of_months =6:
-    semi_annual_raise *2
+while number_of_months < portion_deposit:
+    print(semi_annual_raise)
 
 number_of_months = 0
 
