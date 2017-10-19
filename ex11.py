@@ -24,4 +24,4 @@ while guess !=x:
     if (guess == x):
         print ("Congratulation , you've guessed the number")
         print ("You found the number in", count)
-#Fizzbuzz
+#Guess your number
