@@ -9,6 +9,7 @@ import string
 
 WORDLIST_FILENAME = "words.txt"
 
+
 def load_words():
     """
     Returns a list of valid words. Words are strings of lowercase letters.
@@ -44,13 +45,6 @@ def choose_word(wordlist):
 # so that it can be accessed from anywhere in the program
 wordlist = load_words()
 
-def remove_dups(L1, L2):
- for e in L1:
- if e in L2:
- L1.remove(e)
-L1 = [1, 2, 3, 4]
-L2 = [1, 2, 5, 6]
-remove_dups(L1, L2)
 
 def is_word_guessed(secret_word, letters_guessed):
     '''
@@ -61,8 +55,12 @@ def is_word_guessed(secret_word, letters_guessed):
     returns: boolean, True if all the letters of secret_word are in letters_guessed;
       False otherwise
     '''
-    # FILL IN YOUR CODE HERE AND DELETE "pass"
-    pass
+    correct = 0
+    for letter in secret_word:
+        if letter in letters_guessed:
+            correct += 1
+
+    return correct == len(secret_word)
 
 
 
@@ -73,8 +71,15 @@ def get_guessed_word(secret_word, letters_guessed):
     returns: string, comprised of letters, underscores (_), and spaces that represents
       which letters in secret_word have been guessed so far.
     '''
-    # FILL IN YOUR CODE HERE AND DELETE "pass"
-    pass
+    ret = ''
+
+    for letter in secret_word:
+        if letter in letters_guessed:
+            ret += letter + ' '
+        else:
+            ret += '_ '
+
+    return ret
 
 
 
@@ -84,10 +89,23 @@ def get_available_letters(letters_guessed):
     returns: string (of letters), comprised of letters that represents which letters have not
       yet been guessed.
     '''
-    # FILL IN YOUR CODE HERE AND DELETE "pass"
-    pass
+    ret = ''
 
+    for letter in string.ascii_lowercase:
+        if letter not in letters_guessed:
+            ret += letter
 
+    return ret
+
+def in_secret_word(secret_word, guess):
+    return guess in secret_word
+
+def print_output(message, guessed):
+    print(message, guessed)
+
+def calculate_score(guesses, word):
+    points = len(set(word))
+    return guesses * points
 
 def hangman(secret_word):
     '''
@@ -114,8 +132,54 @@ def hangman(secret_word):
 
     Follows the other limitations detailed in the problem write-up.
     '''
-    # FILL IN YOUR CODE HERE AND DELETE "pass"
-    pass
 
-    secret_word = choose_word(wordlist)
-    hangman(secret_word)
+    guesses = 6
+    warnings = 3
+    letter_list = []
+    # available = get_available_letters(letter_list)
+    available = string.ascii_lowercase
+    print("Welcome to the game Hangman!")
+    print(f"I am thinking of a word that is {len(secret_word)} letters long")
+    print("---------")
+    while guesses > 0:
+        print(f"You have {guesses} guesses left.")
+        print(f"Available letters: {available}")
+        print("---------")
+        guess = str.lower(input('Please guess a letter:'))
+        if not str.isalpha(guess):
+            warnings -= 1
+            print_output(f"Oops! That is not a valid letter. You have {warnings} left:", get_guessed_word(secret_word, letter_list))
+            if warnings == 0:
+                guesses -= 1
+                warnings = 3
+                continue
+        else:
+            letter_list.append(guess)
+            if in_secret_word(secret_word, guess):
+                print_output("Good guess:", get_guessed_word(secret_word, letter_list))
+                if is_word_guessed(secret_word, letter_list):
+                    break
+            else:
+                guesses -= 1
+                print_output("Oops! That letter is not in my word:", get_guessed_word(secret_word, letter_list))
+                if guesses == 0:
+                    break
+
+        available = get_available_letters(letter_list)
+
+    print("---------")
+
+    if is_word_guessed(secret_word, letter_list):
+        print("Congratulations, you won!")
+        print("Your total score for this game is: ", calculate_score(guesses, secret_word))
+    else:
+        print(f"Sorry, you ran out of guesses. The word was {secret_word}")
+
+# print(is_word_guessed("monkey", ['m', 'o', 'n', 'k', 'e', 'y']))
+# print(get_guessed_word("monkey", ['m', 'n', 'k', 'y']))
+# print(get_available_letters(['m', 'n', 'k', 'y']))
+
+hangman("monkey")
+
+# secret_word = choose_word(wordlist)
+# hangman(secret_word)
