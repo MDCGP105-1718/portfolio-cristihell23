@@ -1,3 +1,10 @@
+def end_game():
+    print("Game Over.")
+    exit()
+def izi_game():
+    print("That Was Easy.")
+    exit()
+
 print("One Night , You Get Out With Your Friends In A Pub , You Get Wasted , Somehow You get Home.")
 print("The Next Day You Woke Up , You Realise That This Is Not Your House And You Are Not Alone.")
 print("Find Out What's Happening!")
@@ -28,15 +35,21 @@ while turns < 5:
         print ("You Did It , But Is That Really Ok?")
         print ("Yourself:I Broke The Door , I Feel Insecure.")
         print ("I should procced to the next room.")
-        turns +=3
+        turns +=2
         print ("You've spent",turns,"Turn(s) Doing This Action.")
         break
     elif turns == 5:
         print ("You Lost!")
         break
+    elif Action == "turns":
+        turns -=1
+        print("You've Spent",turns,"turn(s)")
     else:
         print ("This Is Not A Valid Action!")
         print ("You've spent",turns,"Turn(s) Doing This Action.")
+
+if turns == 5:
+    end_game()
 
 print("As You Escaped The First Room , You Make Your Way To The Second Room.")
 print("You Hear A Lot Of Sounds , You Get Restless.")
@@ -74,19 +87,28 @@ while continuedt <= 5:
     elif Action == "meow,meow,meow":
         print("You've Opened A Secret Door Leading To Exit.")
         print("Congratulation , You've Finished The Game!")
+        izi_game()
     elif Action == "break window":
         print("You Break The Window , Making A Lot Of Noise , But You Did Found A Key.")
         print("You Now Have A Key.")
         print("Yourself:WHY DO I ALWAYS HAVE TO BREAK SOMETHING???")
+        continuedt +=2
+        print("You've spent",continuedt,"Turn(s) Doing This Action.")
         break
     elif Action == "break door":
         print("You Tried To Break A Metal Door , You Failed.")
         print("Yourself:Have I Really Tried That? My Shoulder Hurts.")
         continuedt +=2
         print("You've spent",continuedt,"Turn(s) Doing This Action.")
+    elif Action == "turns":
+        continuedt -=1
+        print("You've Spent",continuedt,"turn(s)")
     else:
         print ("This Is Not A Valid Action!")
         print ("You've spent",continuedt,"Turn(s) Doing This Action.")
+
+if turns == 5:
+    end_game()
 
 print("You've Escaped The Second Room , But Will You Be Able To Make It To The Finish?")
 print("You're Making Your Way To Third Room.")
@@ -126,15 +148,24 @@ while continuedtt < 5:
         print("You Turn The Flashlight On And Inspect The Dark Shadow.")
         print("You Found An Hidden Passage.")
         print("Yourself:That Cat Is Really Helpful!")
-        break
+        izi_game()
     elif Action =="find an exit":
         print("You Search For An Exit.")
         print("You Found One!")
         print("Yourself:That Was.... Easy??")
         break
+    elif Action == "turns":
+        continuedtt -=1
+        print("You've Spent",continuedtt,"turns")
+    elif Action == "turns":
+        continuedtt -=1
+        print("You've Spent",continuedtt,"turn(s)")
 else:
     print ("This Is Not A Valid Action!")
     print ("You've spent",continuedtt,"Turn(s) Doing This Action.")
+
+if turns == 5:
+    end_game()
 
 print("You've Made It To The Last Room")
 print("Now Be Carefull Because You're NOT ALONE")
@@ -155,3 +186,38 @@ while continuedttt < 3:
         print("You Are Not Able To See Anything Because You Are Hidden!")
         print("You Decide That You Can Do This:")
         print("Available Actions : 'make a run','elaborate a plan',try to be friendly,'try to fight'")
+    elif Action == "make a run":
+        print("Despite Your Efforts , Something Scared You Really Bad.")
+        print("You Died. It Was A Rabbit Tho'.")
+        print ("You've spent",continuedttt,"Turn(s) Doing This Action.")
+        break
+    elif Action == "elaborate a plan":
+        print("You Decide To Elaborate A Plan.")
+        print("It Took A While.")
+        print("But You Didn't Really Came Up With One.")
+        continuedttt +=3
+        print ("You've spent",continuedttt,"Turn(s) Doing This Action.")
+        print("You Lost!")
+    elif Action == "try to be friendly":
+        print("You Give Up Hidding , And You Find Out That The Monster Is A Rabbit.")
+        print("You Were Just Paranoic.")
+        print("You Won The Game.")
+        print("Congratulation!")
+        break
+    elif Action == "try to fight":
+        print("You Are Prepared To Fight.")
+        print("You Found Out That Your Enemy Is A Rabbit.")
+        print("You Trip And Die.")
+        print("You Lost!")
+        break
+    elif Action == "turns":
+        continuedttt -=1
+        print("You've Spent",continuedttt,"turn(s)")
+else:
+    print ("This Is Not A Valid Action!")
+    print ("You've spent",continuedtt,"Turn(s) Doing This Action.")
+
+if turns == 3:
+    end_game()
+if not end_game():
+    print("True")
